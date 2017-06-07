@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="utf-8">
+     <title>vueapp-7-06-2017</title>
+  </head>
+  <body>
+      <div  v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }" id="app">
+       <h1>{{message}}</h1>
+
+      <h2>Topics</h2>
+ <ul>
+    <li v-for="i in items">
+      {{i}}
+       </li>
+  </ul>
+  <hr>
+
+  <p>Enter username and password to log in</p>
+      <div v-if="isLoggedIn">
+          Welcome to vuejs!
+        <button @click="login" type="submit">Logout</button>
+     </div>
+  <div v-else>
+<input type="text" placeholder="username">
+    <input type="password" placeholder="password">
+    <button @click="login" type="submit">Login</button>
+  <br>
+   
+<h1>Click to select an item</h1>
+<select v-model="dataselect">
+   <option disabled value="">Please Option select first</option>
+     <option>Item Instances</option>
+        <option>Item Syntax</option>
+       <option>Item Event handling</option>
+    </select>
+<span>dataselect: {{ dataselect }}</span>
+<hr>
+  <p>Enter names</p>
+    <input type="text" v-model="first_name">
+	   <input type="text" v-model="last_name"><br><br>
+		{{ getName }}
+   <br>
+  <br>
+<hr>
+     <button @click="clickMe" type="submit">Click</button>
+   <hr>
+ <br>
+ <p>Select familiar subject</p>
+   <input type="checkbox" id="nodejs" value="nodejs" v-model="liveBoxName">
+     <label for="Dsp">Nodejs</label>
+       <input type="checkbox" id="vuejs" value="vuejs" v-model="liveBoxName">
+       <label for="vuejs">Vuejs</label>
+     <input type="checkbox" id="webpack" value="webpack" v-model="liveBoxName">
+    <label for="webpack">Webpack</label>
+   <br>
+  <span>labelcheck names: {{ liveBoxName }}</span>
+</div>
+
+</body>
+</html>
