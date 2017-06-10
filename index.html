@@ -1,61 +1,129 @@
 <!DOCTYPE html>
-<html>
-   <head>
-     <meta charset="utf-8">
-     <title>vueapp-7-06-2017</title>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>vueapp-7-06-2017</title>
+      <style>
+      .larger{
+        font-size: 20px;
+      }
+      .smaller{
+        font-size: 8px;
+      }
+      </style>
   </head>
-  <body>
-      <div  v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }" id="app">
-       <h1>{{message}}</h1>
+    <body>
+      <div id="app">
+        <h2 v-rainbow>{{message}}</h2>
+          <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="">
+              <a href="#">Manage Posts</a>
+            </li>
+            <li role="presentation">
+              <a href="#">Create new Post</a>
+            </li>
+          </ul>
+        </nav>
+          <h3 class="text-muted">Admin Zone</h3>
+        </div>
 
-      <h2>Topics</h2>
- <ul>
-    <li v-for="i in items">
-      {{i}}
-       </li>
-  </ul>
-  <hr>
+        <template id="create-template">
+          <div>
+          <h2>Create new Post</h2>
+          <slot name="text"></slot>
 
-  <p>Enter username and password to log in</p>
-      <div v-if="isLoggedIn">
-          Welcome to vuejs!
-        <button @click="login" type="submit">Logout</button>
-     </div>
-  <div v-else>
-<input type="text" placeholder="username">
-    <input type="password" placeholder="password">
-    <button @click="login" type="submit">Login</button>
-  <br>
-   
-<h1>Click to select an item</h1>
-<select v-model="dataselect">
-   <option disabled value="">Please Option select first</option>
-     <option>Item Instances</option>
-        <option>Item Syntax</option>
-       <option>Item Event handling</option>
-    </select>
-<span>dataselect: {{ dataselect }}</span>
-<hr>
-  <p>Enter names</p>
-    <input type="text" v-model="first_name">
-	   <input type="text" v-model="last_name"><br><br>
-		{{ getName }}
-   <br>
-  <br>
-<hr>
-     <button @click="clickMe" type="submit">Click</button>
-   <hr>
- <br>
- <p>Select familiar subject</p>
-   <input type="checkbox" id="nodejs" value="nodejs" v-model="liveBoxName">
-     <label for="Dsp">Nodejs</label>
-       <input type="checkbox" id="vuejs" value="vuejs" v-model="liveBoxName">
-       <label for="vuejs">Vuejs</label>
-     <input type="checkbox" id="webpack" value="webpack" v-model="liveBoxName">
-    <label for="webpack">Webpack</label>
-   <br>
-  <span>labelcheck names: {{ liveBoxName }}</span>
+        <label class="col-sm-2 control-label">Input title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Post title">
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Create body
+          </label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="5">
+          </textarea>
+        </div>
+        </div>
+
+        <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">  Create</button>
+        </div>
+        </div>
+        </template>
+          <h2>Topics</h2>
+           <ul>
+            <li v-for="i in items" :key="i in items">
+              {{i}}
+            </li>
+          </ul>
+          <hr>
+
+        <p>Enter username and password to log in</p>
+          <div v-if="isLoggedIn">
+            Welcome to vuejs!
+          <button @click="login" type="submit">Logout</button>
+          </div>
+          <div v-else>
+            <input type="text" placeholder="username">
+            <input type="password" placeholder="password">
+            <button @click="login" type="submit">Login</button>
+             <br>
+          </div>
+
+        <h2>Click to select an item</h2>
+        <select v-model="dataselect">
+         <option disabled value="">Please Option select first</option>
+         <option>Item Instances</option>
+          <option>Item Syntax</option>
+          <option>Item Event handling</option>
+        </select>
+        <span>dataselect: {{ dataselect }}</span>
+        <hr>
+        <p>Enter names</p>
+          <input type="text" v-model="first_name">
+          <input type="text" v-model="last_name"><br><br>
+             {{ getName }}  
+          <br>
+          <br>
+        <button @click="clickMe" type="submit">Click</button>
+
+        <p>Select familiar subject</p>
+          <input type="checkbox" id="nodejs" value="nodejs" v-model="liveBoxName">
+          <label for="Dsp">Nodejs</label>
+          <input type="checkbox" id="vuejs" value="vuejs" v-model="liveBoxName">
+          <label for="vuejs">Vuejs</label>
+          <input type="checkbox" id="webpack" value="webpack" v-model="liveBoxName">
+          <label for="webpack">Webpack</label>
+          <br>
+          <span>labelcheck names: {{ liveBoxName }}</span>
+        <h2>Enter a random value in the box to convert</h2>
+          <label>km: <input type="text" v-model="km2"></label><br/>
+          <label>cm: <input type="text" v-model="cm"></label><br/>
+          <label>mm: <input type="text" v-model="mm"></label><br/>
+
+        <p>Change font size</p>
+          <div id="main_area1">
+           <button id="button1" value="larger" type="button" @click="changeFontSizeLarger()">Larger</button>
+          </div>
+          <div id="main_area2">
+            <button id="button2" value="smaller" type="button" @click="changeFontSizeSmaller()">Smaller</button>
+          </div>
+          <div>
+            <p id="demo" v-bind:class="{larger:clicked,smaller:notClicked}">Change the fontsize to bigger or smaller</p>
+          </div>
+        <template>
+          <div>
+            <form-helper>
+              <h2 slot="title">Slot title</h2>
+              <p slot="text">Paragraph to the slot</p>
+            </form-helper>
+          </div>
+        </template>
 </div>
-
 </body>
 </html>
